@@ -1,0 +1,19 @@
+{% extends 'blogs/base.html' %}
+{% block content %}
+    <div class="container mt-5">
+        <h2>Blog Posts</h2>
+        <a href="{% url 'blogs:new_post' %}" class="btn btn-success mb-3">New Post</a>
+        <ul class="list-group">
+            {% for post in posts %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <strong>{{ post.title }}</strong> - {{ post.text|truncatechars:100 }}
+                    </div>
+                    <a href="{% url 'blogs:edit_post' post.id %}" class="btn btn-warning btn-sm">Edit</a>
+                </li>
+            {% empty %}
+                <p>No blog posts yet!</p>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
